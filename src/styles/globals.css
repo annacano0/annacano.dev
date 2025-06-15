@@ -1,0 +1,156 @@
+:root {
+  /* Dark Mode (Default) */
+  --black: #000000;
+  --rich-black: #02111bff;
+  --red: #aa0000;
+  --light-gray: #aaaaaa;
+  --dark-gray: #555555;
+  --dim-white: #dddddd;
+  --white: #ffffff;
+
+  /*custom color palette -> RED */
+  --auburn: #a52424ff;
+  --silver: #b6b6b6ff;
+  --red-cmyk: #ff2a2aff;
+
+  /*custom color palette -> NORMAL */
+  --persian-pink: #fc7fc8ff;
+  --caribbean-current: #2c6c76ff;
+  --screamin-green: #86fa7eff;
+
+  /* Default dark theme variables */
+  --background: var(--rich-black);
+  --foreground: var(--silver);
+  --accent: var(--red-cmyk);
+  --secondary: var(--silver);
+  --tertiary: var(--auburn);
+  --highlight: var(--white);
+  --error: var(--red-cmyk);
+}
+
+/* Light mode theme - activated via OS/browser preference or class */
+@media (prefers-color-scheme: light) {
+  :root:not(.dark-theme) {
+    /* Light Mode Colors */
+    --background: var(--dim-white);
+    --foreground: var(--rich-black);
+    --accent: var(--auburn);
+    --secondary: var(--red-cmyk);
+    --tertiary: var(--silver);
+    --highlight: var(--auburn);
+    --error: var(--auburn);
+  }
+}
+
+/* Manual theme classes that override the media query */
+:root.light-theme {
+  /* Light Mode Colors */
+  --background: var(--dim-white);
+  --foreground: var(--rich-black);
+  --accent: var(--auburn);
+  --secondary: var(--red-cmyk);
+  --tertiary: var(--silver);
+  --highlight: var(--auburn);
+  --error: var(--auburn);
+}
+
+:root.dark-theme {
+  /* Dark Mode Colors */
+  --background: var(--rich-black);
+  --foreground: var(--silver);
+  --accent: var(--red-cmyk);
+  --secondary: var(--silver);
+  --tertiary: var(--auburn);
+  --highlight: var(--white);
+  --error: var(--red-cmyk);
+}
+
+@font-face {
+  font-family: "EnterCommand";
+  src: local("EnterCommand"),
+    url("public/fonts/EnterCommand.woff2") format("woff2"),
+    url("public/fonts/EnterCommand.woff") format("woff"),
+    url("public/fonts/EnterCommand.ttf") format("truetype");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "EnterCommand";
+  src: local("EnterCommand-Bold"),
+    url("public/fonts/EnterCommand-Bold.woff2") format("woff2"),
+    url("public/fonts/EnterCommand-Bold.woff") format("woff"),
+    url("public/fonts/EnterCommand-Bold.ttf") format("truetype");
+
+  font-weight: bold;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "EnterCommand";
+  src: local("EnterCommand-Italic"),
+    url("public/fonts/EnterCommand-Italic.woff2") format("woff2"),
+    url("public/fonts/EnterCommand-Italic.woff") format("woff"),
+    url("public/fonts/EnterCommand-Italic.ttf") format("truetype");
+  font-weight: 500;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Space Mono";
+  src: local("Space Mono Regular"), local("SpaceMono-Regular"),
+    url("public/fonts/SpaceMono-Regular.woff2") format("woff2"),
+    url("public/fonts/SpaceMono-Regular.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+html {
+  background-color: var(--background);
+  color: var(--foreground);
+  font-family: sans-serif;
+}
+
+body {
+  margin: 0 auto;
+  width: 100%;
+  max-width: 80ch;
+  padding: 1rem;
+  line-height: 1.5;
+  font-family: "EnterCommand", sans-serif;
+}
+
+h1 {
+  font-size: 4rem;
+  color: var(--highlight);
+}
+
+p {
+  font-size: 1.5rem;
+}
+
+.text-secondary {
+  color: var(--auburn);
+}
+
+a {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+a:active {
+  color: var(--highlight);
+}
