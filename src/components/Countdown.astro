@@ -25,7 +25,7 @@ const TIMESTAMP_END = final_date.getTime();
 
   <p class="text-secondary">
     Check the progress of the code on the <a
-      href="https://github.com/annacano0/portfolio"
+      href="https://github.com/annacano0/annacano.dev"
       target="_blank">repository</a
     >
   </p>
@@ -80,25 +80,82 @@ const TIMESTAMP_END = final_date.getTime();
 </script>
 
 <style>
-  .countdown-container header {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+  .countdown-container {
+    margin-top: -2rem;
+    max-width: 500px;
+    width: 100%;
+    padding: 0 1rem;
+  }
+
+  header {
+    text-align: center;
+    line-height: 1.4;
+    margin-bottom: 2rem;
+  }
+
+  h1 {
+    margin-bottom: 0.75rem;
   }
 
   .countdown {
-    color: var(--highlight);
     display: flex;
-    flex-direction: row;
+    flex-wrap: wrap;
     justify-content: center;
-    gap: 1rem;
+    gap: 1.25rem;
     background-color: var(--accent);
-    padding: 1rem;
     border: 0.2rem solid var(--highlight);
-    margin: 1em 0em;
+    padding: 1rem 1.5rem;
+    color: var(--highlight);
+    margin: 1.5rem 0;
+    color: var(--highlight);
+  }
+
+  .countdown p {
+    text-align: center;
+    color: var(--highlight);
+  }
+
+  .countdown span {
+    font-weight: bold;
   }
 
   .text-secondary {
     text-align: center;
+    font-size: 1rem;
+    color: var(--tertiary);
+  }
+
+  @media screen and (max-width: 600px) {
+    .countdown-container {
+      margin-top: -2rem;
+    }
+    .countdown {
+      gap: 1rem;
+      padding: 1rem;
+    }
+    header {
+      margin-bottom: 0rem;
+    }
+
+    h1 {
+      font-size: 5em;
+      line-height: 0.75;
+      margin-bottom: rem;
+    }
+
+    h2 {
+      font-size: 1.25rem;
+    }
+
+    .countdown p {
+      font-size: 1.25rem;
+    }
+
+    .countdown span {
+      font-size: 1.5rem;
+    }
+    .text-secondary {
+      font-size: 1.25rem;
+    }
   }
 </style>
