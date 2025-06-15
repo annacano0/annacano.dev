@@ -67,10 +67,9 @@
 
 @font-face {
   font-family: "EnterCommand";
-  src: local("EnterCommand"),
-    url("public/fonts/EnterCommand.woff2") format("woff2"),
-    url("public/fonts/EnterCommand.woff") format("woff"),
-    url("public/fonts/EnterCommand.ttf") format("truetype");
+  src: local("EnterCommand"), url("/fonts/EnterCommand.woff2") format("woff2"),
+    url("../assets/fonts/") format("woff"),
+    url("/fonts/EnterCommand.ttf") format("truetype");
   font-weight: 500;
   font-style: normal;
   font-display: swap;
@@ -79,9 +78,9 @@
 @font-face {
   font-family: "EnterCommand";
   src: local("EnterCommand-Bold"),
-    url("public/fonts/EnterCommand-Bold.woff2") format("woff2"),
-    url("public/fonts/EnterCommand-Bold.woff") format("woff"),
-    url("public/fonts/EnterCommand-Bold.ttf") format("truetype");
+    url("/fonts/EnterCommand-Bold.woff2") format("woff2"),
+    url("/fonts/EnterCommand-Bold.woff") format("woff"),
+    url("/fonts/EnterCommand-Bold.ttf") format("truetype");
 
   font-weight: bold;
   font-style: normal;
@@ -91,9 +90,9 @@
 @font-face {
   font-family: "EnterCommand";
   src: local("EnterCommand-Italic"),
-    url("public/fonts/EnterCommand-Italic.woff2") format("woff2"),
-    url("public/fonts/EnterCommand-Italic.woff") format("woff"),
-    url("public/fonts/EnterCommand-Italic.ttf") format("truetype");
+    url("/fonts/EnterCommand-Italic.woff2") format("woff2"),
+    url("/fonts/EnterCommand-Italic.woff") format("woff"),
+    url("/fonts/EnterCommand-Italic.ttf") format("truetype");
   font-weight: 500;
   font-style: italic;
   font-display: swap;
@@ -102,8 +101,8 @@
 @font-face {
   font-family: "Space Mono";
   src: local("Space Mono Regular"), local("SpaceMono-Regular"),
-    url("public/fonts/SpaceMono-Regular.woff2") format("woff2"),
-    url("public/fonts/SpaceMono-Regular.woff") format("woff");
+    url("/fonts/SpaceMono-Regular.woff2") format("woff2"),
+    url("/fonts/SpaceMono-Regular.woff") format("woff");
   font-weight: normal;
   font-style: normal;
   font-display: swap;
