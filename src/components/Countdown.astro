@@ -1,0 +1,74 @@
+---
+const { final_date } = Astro.props;
+const TIMESTAMP_END = final_date.getTime();
+---
+
+<div>
+  <header>
+    <h1>Currently on development</h1>
+    <p>Coming in:</p>
+  </header>
+
+  <section data-date={TIMESTAMP_END}>
+    <p><span data-days>00</span> d</p>
+    <p>
+      <span data-hours>00</span> h
+    </p>
+    <p>
+      <span data-minutes>00</span> m
+    </p>
+    <p>
+      <span data-seconds>00</span> s
+    </p>
+  </section>
+
+  <p></p>
+</div>
+
+<script>
+  const SECOND = 1000;
+  const MINUTE = SECOND * 60;
+  const HOUR = MINUTE * 60;
+  const DAY = HOUR * 24;
+
+  function init() {
+    const $countdown = document.querySelector("[data-date]");
+    if (!$countdown) return;
+
+    const $days = $countdown.querySelector("[data-days]");
+    const $hours = $countdown.querySelector("[data-hours]");
+    const $minutes = $countdown.querySelector("[data-minutes]");
+    const $seconds = $countdown.querySelector("[data-seconds]");
+
+    const timestamp = $countdown.getAttribute("data-date");
+    const date = new Date(+timestamp!).getTime();
+
+    const formatTime = (time: number) => {
+      return Math.floor(+time).toString().padStart(2, "0");
+    };
+
+    function updateCountdown() {
+      //get the difference of ms between the first and second date
+      const now = Date.now();
+      const diff = date - now;
+
+      //update days
+      $days instanceof HTMLElement &&
+        ($days.innerText = formatTime(diff / DAY));
+
+      //update hours
+      $hours instanceof HTMLElement &&
+        ($hours.innerText = formatTime((diff % DAY) / HOUR));
+
+      //update minutes
+      $minutes instanceof HTMLElement &&
+        ($minutes.innerText = formatTime((diff % HOUR) / MINUTE));
+
+      //update seconds
+      $seconds instanceof HTMLElement &&
+        ($seconds.innerText = formatTime((diff % MINUTE) / SECOND));
+    }
+    setInterval(updateCountdown, SECOND);
+  }
+  init();
+</script>
