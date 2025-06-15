@@ -3,13 +3,14 @@ const { final_date } = Astro.props;
 const TIMESTAMP_END = final_date.getTime();
 ---
 
-<div>
+<div class="countdown-container">
   <header>
-    <h1>Currently on development</h1>
-    <p>Coming in:</p>
+    <h1>Launching Soon</h1>
+    <p>This is under development. Stay tuned!</p>
+    <h2>Countdown to launch:</h2>
   </header>
 
-  <section data-date={TIMESTAMP_END}>
+  <section class="countdown" data-date={TIMESTAMP_END}>
     <p><span data-days>00</span> d</p>
     <p>
       <span data-hours>00</span> h
@@ -22,7 +23,12 @@ const TIMESTAMP_END = final_date.getTime();
     </p>
   </section>
 
-  <p></p>
+  <p class="text-secondary">
+    Check the progress of the code on the <a
+      href="https://github.com/annacano0/portfolio"
+      target="_blank">repository</a
+    >
+  </p>
 </div>
 
 <script>
@@ -72,3 +78,27 @@ const TIMESTAMP_END = final_date.getTime();
   }
   init();
 </script>
+
+<style>
+  .countdown-container header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .countdown {
+    color: var(--highlight);
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 1rem;
+    background-color: var(--accent);
+    padding: 1rem;
+    border: 0.2rem solid var(--highlight);
+    margin: 1em 0em;
+  }
+
+  .text-secondary {
+    text-align: center;
+  }
+</style>
