@@ -57,6 +57,17 @@
 }
 
 @font-face {
+    font-family: 'Pixeled English Font';
+    src: local('Pixeled English Font'), local('pixeled_english_font'),
+        url('pixeled_english_font.woff2') format('woff2'),
+        url('pixeled_english_font.woff') format('woff');
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap;
+}
+
+
+@font-face {
   font-family: "EnterCommand";
   src: local("EnterCommand"), url("/fonts/EnterCommand.woff2") format("woff2"),
     url("../assets/fonts/") format("woff"),
