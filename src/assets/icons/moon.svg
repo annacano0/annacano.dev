@@ -1,5 +1,12 @@
 <svg xmlns="http://www.w3.org/2000/svg" version="1.0"
     viewBox="0 0 1600 1600">
+    <style>
+        path{
+        fill: rgb(45, 45, 60);
+        }
+
+    </style>
     <path
         d="M600 150v50H400v100H300v100H200v200H100v500h100v200h100v100h100v100h200v100h500v-100h200v-100h100v-100h100v-100h-200v100h-300v-100H900v-200H800V700h100V500h100V400h200v100h300V400h-100V300h-100V200h-200V100H600v50z" />
+
 </svg>

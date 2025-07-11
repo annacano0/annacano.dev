@@ -1,6 +1,5 @@
 ---
-import MoonIcon from "../assets/icons/moon.svg";
-import SwordIcon from "../assets/icons/sword.svg";
+
 ---
 
 <header class="header">
@@ -8,9 +7,7 @@ import SwordIcon from "../assets/icons/sword.svg";
     <a href="/">Home</a>
     <a href="/about/">About</a>
     <a href="/projects/">Projects</a>
-    <button class="icon icon-simple" id="theme-toggle">
-      <MoonIcon width={24} fill="currentColor" />
-    </button>
+    <button class="icon icon-simple" id="theme-toggle"></button>
   </nav>
 </header>
 
@@ -59,5 +56,18 @@ import SwordIcon from "../assets/icons/sword.svg";
 
   nav a {
     font-size: 1.5em;
+  }
+
+  :global(.dark-theme button.icon) {
+    background: url("../assets/icons/sword.svg") no-repeat center;
+  }
+
+  :global(.light-theme button.icon) {
+    background: url("../assets/icons/moon.svg") no-repeat center;
+  }
+
+  button.icon {
+    width: 34px;
+    background-size: 100%;
   }
 </style>
