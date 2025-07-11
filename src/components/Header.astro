@@ -1,5 +1,6 @@
 ---
-
+import MoonIcon from "../assets/icons/moon.svg";
+import SwordIcon from "../assets/icons/sword.svg";
 ---
 
 <header class="header">
@@ -7,9 +8,39 @@
     <a href="/">Home</a>
     <a href="/about/">About</a>
     <a href="/projects/">Projects</a>
-    <a href="#" class="theme-button">Theme</a>
+    <button class="icon icon-simple" id="theme-toggle">
+      <MoonIcon width={24} fill="currentColor" />
+    </button>
   </nav>
 </header>
+
+<script>
+  const themeToggle = document.getElementById("theme-toggle");
+
+  const THEMES = {
+    LIGHT: "light-theme",
+    DARK: "dark-theme",
+  };
+
+  const setTheme = (theme: string) => {
+    document.documentElement.classList.remove(THEMES.LIGHT, THEMES.DARK);
+    document.documentElement.classList.add(theme);
+    localStorage.setItem("theme", theme);
+  };
+
+  const savedTheme = localStorage.getItem("theme");
+
+  if (savedTheme) {
+    document.documentElement.classList.add(savedTheme);
+    setTheme(savedTheme);
+  }
+
+  themeToggle?.addEventListener("click", () => {
+    const isDark = document.documentElement.classList.contains(THEMES.DARK);
+    const newTheme = isDark ? THEMES.LIGHT : THEMES.DARK;
+    setTheme(newTheme);
+  });
+</script>
 
 <style>
   .header {
