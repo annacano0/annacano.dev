@@ -3,13 +3,69 @@ import "../styles/global.css";
 import BaseLayout from "../layouts/BaseLayout.astro";
 ---
 
-<html lang="en">
-  <BaseLayout pageTitle="About me">
-    <p>
-      Lorem ipsum dolor sit amet consectetur adipisicing elit. Consectetur
-      dolorum eos eveniet earum neque quia nemo, a blanditiis aperiam error
-      reiciendis dolores iste deleniti quo. Incidunt repellendus quisquam quasi
-      fugiat.
-    </p>
-  </BaseLayout>
-</html>
+<BaseLayout pageTitle="anna cano">
+  <div class="page-container">
+    <div class="image-container"></div>
+    <div class="text-container">
+      <h2>Full Stack Developer</h2>
+      <p>
+        Passionate about writing clean code, building efficient systems,
+        collaborating in agile environments and art!
+      </p>
+    </div>
+  </div>
+</BaseLayout>
+
+<style>
+  .page-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 2em;
+    padding: 5em 15em;
+    flex-wrap: wrap;
+    margin-bottom: 2em;
+  }
+
+  .image-container {
+    background: url("../assets/icons/me.svg") no-repeat center center;
+    background-size: contain;
+    width: 100%;
+    max-width: 250px;
+    aspect-ratio: 1;
+    flex-shrink: 0;
+  }
+
+  :global(.dark-theme .image-container) {
+    background-color: var(--tertiary);
+    border: 5px solid var(--error);
+  }
+
+  :global(.light-theme .image-container) {
+    background-color: var(--secondary);
+    border: 5px solid var(--primary);
+  }
+
+  .text-container {
+    font-size: 1.75em;
+    line-height: 1.5;
+    flex: 1;
+    min-width: 300px;
+  }
+
+  @media (max-width: 768px) {
+    .page-container {
+      flex-direction: column;
+      padding: 2em;
+    }
+
+    .image-container {
+      max-width: 250px;
+    }
+
+    h2,
+    p {
+      text-align: center;
+    }
+  }
+</style>
