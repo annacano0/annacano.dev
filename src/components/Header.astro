@@ -41,17 +41,20 @@
 
 <style>
   .header {
-    width: 90%;
+    width: 100%;
     background-color: var(--background);
-    border-bottom: 1px solid red;
     position: fixed;
     top: 0px;
+    display: flex;
+    justify-content: center;
   }
 
   nav {
+    width: 90%;
     display: flex;
     justify-content: space-between;
-    margin: 0.25em 3em;
+    border-bottom: 1px solid red;
+    padding: 0.75% 10%;
   }
 
   nav a {
@@ -59,6 +62,7 @@
   }
 
   button.icon {
+    size: 1em;
     background: url("../assets/icons/sword.svg") no-repeat center;
   }
 

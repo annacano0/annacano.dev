@@ -24,7 +24,7 @@
 @media (prefers-color-scheme: light) {
   :root:not(.dark-theme) {
     /* Light Mode Colors */
-    --background: var(--dim-white);
+    --background: var(--white);
     --primary: var(--red-cmyk);
     --secondary: var(--dark-silver);
     --tertiary: var(--auburn);
@@ -37,7 +37,7 @@
 /* Manual theme classes that override the media query */
 :root.light-theme {
   /* Light Mode Colors */
-  --background: var(--dim-white);
+  --background: var(--white);
   --primary: var(--soft-black);
   --secondary: var(--red-cmyk);
   --tertiary: var(--silver);
@@ -110,6 +110,7 @@
   font-style: normal;
   font-display: swap;
 }
+
 * {
   box-sizing: border-box;
   margin: 0;
@@ -149,6 +150,7 @@ p {
   font-size: 1.5rem;
   color: var(--secondary);
 }
+
 h2 {
   color: var(--highlight);
   font-size: 1.75rem;
