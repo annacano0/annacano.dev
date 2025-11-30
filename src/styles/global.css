@@ -1,4 +1,10 @@
 :root {
+  /* Common colors */
+  --yellow: #edce5e;
+  --orange: #e3844e;
+  --blue: #58b3ed;
+  --dark-blue: #195b9d;
+
   /* Dark Mode (Default) */
   --black: #000000;
   --rich-black: #02111bff;
