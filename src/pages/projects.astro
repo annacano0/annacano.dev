@@ -2,15 +2,14 @@
 import "../styles/global.css";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import projects from "../data/projects";
-import { Image } from "astro:assets";
 ---
 
 <BaseLayout pageTitle="projects">
   <div class="page-container">
-    <section class="slider">
+    <section class="card-container">
       {
         projects.map((project) => (
-          <article class="slider-item">
+          <article class="card">
             <div class="card-img-container">
               <img
                 src={project.image.src}
@@ -56,83 +55,54 @@ import { Image } from "astro:assets";
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 1.5em 3em;
+    padding: 2em 3em;
+    margin-bottom: 4em;
   }
 
-  .slider {
-    aspect-ratio: 5 / 3;
-    width: 90%;
-    position: relative;
+  .card-container {
     display: flex;
-    overflow-x: auto;
-    overflow-y: hidden;
-    scroll-snap-type: x mandatory;
-    scroll-behavior: smooth;
-    max-height: 65vh;
-  }
-
-  /* scrollbar styling */
-
-  .slider::-webkit-scrollbar {
-    background: var(--tertiary);
-  }
-
-  .slider::-webkit-scrollbar-thumb {
-    background-color: darkred;
-  }
-
-  .slider::-webkit-scrollbar-track {
-    background: var(--error);
-    width: 50px;
-  }
-
-  .slider::-webkit-scrollbar {
-    height: 5px;
-  }
-
-  .slider::-webkit-scrollbar-track {
-    background: transparent;
-    border-radius: 10px;
-  }
-
-  .slider::-webkit-scrollbar-thumb {
-    background: var(--primary);
-    background-clip: content-box;
-  }
-
-  /* cards styling */
-
-  .slider-item {
-    flex: 0 0 100%;
-    scroll-snap-align: start;
-    background-color: var(--shadow);
-    margin: 0em 1em 2em 0em;
-    display: grid;
-    grid-template-columns: 45% 55%;
-    max-width: 100%;
-    overflow-y: hidden;
-  }
-
-  .slider-item h2 {
-    font-size: 4em;
-  }
-
-  .card-img-container {
-    display: flex;
+    flex-wrap: wrap;
+    gap: 2.5em;
     justify-content: center;
-    overflow: hidden;
   }
 
-  .card-info-container {
-    padding: 1em 2em;
+  .card {
+    background-color: var(--error);
+    width: 25em;
+    height: 35em;
+    display: flex;
+    flex-direction: column;
+    padding: 1em;
+    border: 15px double var(--background);
+    box-shadow: 8px 8px 0 var(--background);
+    transition: all 0.15s ease-in-out;
+  }
+
+  .card:hover {
+    transform: translate(-4px, -4px);
+    box-shadow: 12px 12px 0 var(--tertiary);
+    background-color: var(--primary);
   }
 
   .card-img {
-    width: auto;
-    height: 100%;
+    width: 100%;
+    border: 4px solid var(--background);
   }
 
-  /* tech stack styling */
+  .card h2 {
+    font-size: 2em;
+    text-transform: uppercase;
+    color: var(--background);
+  }
+
+  .card p {
+    color: var(--background);
+    line-height: 1.4;
+  }
+
+  .card a {
+    color: var(--background);
+  }
 
   .tech-stack {
     list-style: none;
@@ -142,77 +112,55 @@ import { Image } from "astro:assets";
   }
 
   .tech-badge {
-    font-size: 1em;
+    font-size: 0.85em;
     font-weight: bold;
-    padding: 0.05em 0.5em;
+    padding: 0.2em 0.6em;
+    border: 2px solid currentColor;
+    transform: rotate(-2deg);
+  }
+
+  .tech-badge:nth-child(even) {
+    transform: rotate(2deg);
   }
 
   .yellow {
     color: var(--yellow);
-    border: 1px solid var(--yellow);
   }
   .orange {
     color: var(--orange);
-    border: 1px solid var(--orange);
   }
   .blue {
     color: var(--blue);
-    border: 1px solid var(--blue);
   }
-
-  /* status styling - TODO: display status and footer */
 
   .card-info-container footer {
-    display: none;
+    margin-top: auto;
   }
+
   .project-status {
+    display: inline-block;
     font-weight: bold;
-    font-size: 1.2em;
+    font-size: 1em;
+    padding: 0.3em 0.6em;
+    text-transform: uppercase;
   }
 
   .not-started {
     color: var(--blue);
-    border: 1px solid var(--blue);
+    border: 2px solid var(--blue);
   }
 
   .wip {
     color: var(--orange);
-    border: 1px solid var(--orange);
+    border: 2px solid var(--orange);
   }
 
   .completed {
     color: var(--yellow);
-    border: 1px solid var(--yellow);
+    border: 2px solid var(--yellow);
   }
 
-  /* responsive styling */
-
-  @media (width < 1050px) {
-    .slider {
-      height: 65vh;
-    }
-    .slider-item h2 {
-      font-size: 3em;
-    }
-  }
-
-  @media (width < 1000px) {
-    .slider-item h2 {
-      font-size: 2.5em;
-    }
-  }
-  @media (width < 800px) {
-    .slider-item {
-      grid-template-columns: none;
-      grid-template-rows: auto auto;
-    }
-    .card-img {
-      width: 100%;
-      height: auto;
-      object-fit: cover;
-    }
-    .slider-item h2 {
-      font-size: 2.5em;
-    }
+  footer {
+    display: none;
   }
 </style>
