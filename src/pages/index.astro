@@ -12,6 +12,15 @@ import BaseLayout from "../layouts/BaseLayout.astro";
         Passionate about writing clean code, building efficient systems,
         collaborating in agile environments and art!
       </p>
+      <div class="info-container">
+        <button class="button">
+          <a href="/AnnaCano_2026_CV.pdf" download>Download CV</a>
+        </button>
+        <div class="icon-text-container">
+          <svg class="icon-container"></svg>
+          <p>Based in Barcelona</p>
+        </div>
+      </div>
     </div>
   </div>
 </BaseLayout>
@@ -22,7 +31,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
     flex-direction: row;
     align-items: center;
     gap: 2em;
-    padding: 5em 15em;
+    padding: 2em 15em 5em 15em;
     flex-wrap: wrap;
     margin-bottom: 2em;
   }
@@ -35,17 +44,16 @@ import BaseLayout from "../layouts/BaseLayout.astro";
     aspect-ratio: 1;
     flex-shrink: 0;
     background-color: var(--tertiary);
-    border: 5px solid var(--error);
   }
 
   :global(.dark-theme .image-container) {
-    background-color: var(--tertiary);
-    border: 5px solid var(--error);
+    background-color: var(--primary);
+    box-shadow: 5px 5px 0 var(--tertiary);
   }
 
   :global(.light-theme .image-container) {
     background-color: var(--secondary);
-    border: 5px solid var(--primary);
+    box-shadow: 5px 5px 0 var(--tertiary);
   }
 
   .text-container {
@@ -55,8 +63,78 @@ import BaseLayout from "../layouts/BaseLayout.astro";
     min-width: 300px;
   }
 
-  @media (max-width: 768px) {
+  .info-container {
+    display: flex;
+    justify-content: flex-start;
+    gap: 0.5em;
+    padding: 2rem 0rem;
+  }
+
+  .icon-text-container {
+    width: 60%;
+    display: flex;
+    align-items: center;
+  }
+
+  a {
+    text-decoration: none;
+  }
+
+  .icon-container {
+    background: url("../assets/icons/location.svg") no-repeat center center;
+    background-size: contain;
+    max-width: 1.5rem;
+    max-height: 1.5rem;
+    aspect-ratio: 1;
+    flex-shrink: 0;
+    margin: 0.5rem;
+  }
+
+  @media (max-width: 800px) {
+    .info-container {
+      padding: 1rem;
+      justify-content: space-evenly;
+    }
+
     .page-container {
+      flex-direction: column;
+      padding: 2em;
+    }
+
+    .image-container {
+      max-width: 250px;
+    }
+
+    h2,
+    p {
+      text-align: center;
+    }
+  }
+
+  @media (max-width: 500px) {
+    .text-container {
+      font-size: 1.75em;
+      line-height: 1.5;
+      flex: 1;
+      min-width: none;
+    }
+
+    .info-container {
+      width: 100%;
+      flex-direction: column;
+      padding: 1rem;
+      justify-content: space-evenly;
+    }
+
+    .icon-text-container {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-evenly;
+    }
+
+    .page-container {
+      flex-wrap: nowrap;
       flex-direction: column;
       padding: 2em;
     }

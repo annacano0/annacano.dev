@@ -2,7 +2,7 @@
     style="shape-rendering:geometricPrecision;text-rendering:geometricPrecision;image-rendering:optimizeQuality;fill-rule:evenodd;clip-rule:evenodd">
     <style>
         path{
-        fill: rgb(45, 45, 60);
+        fill: #24334e;
         }
 
     </style>

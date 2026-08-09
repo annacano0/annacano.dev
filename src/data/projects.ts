@@ -15,7 +15,7 @@ const projects: Projects = [
       statusDescription: "In Progress",
       statusCode: "wip",
     },
-    url: "https://example.com/project-one",
+    url: "https://github.com/annacano0/minesweeper",
     image: minesweeper,
   },
   {
