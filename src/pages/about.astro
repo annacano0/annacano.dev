@@ -1,21 +1,166 @@
 ---
-import "../styles/global.css";
 import BaseLayout from "../layouts/BaseLayout.astro";
-import Countdown from "../components/Countdown.astro";
-const RELEASE_DATE = new Date("2025-08-01T02:00:00Z");
 ---
 
 <BaseLayout pageTitle="about me">
   <div class="page-container">
-    <Countdown final_date={RELEASE_DATE} />
+    <section class="about-section experience">
+      <h2>Experience</h2>
+      <p>
+        Hi! I'm Anna Cano, a software engineer with a passion for creating
+        innovative solutions. I specialize in web development and have a strong
+        background in both front-end and back-end technologies.
+      </p>
+    </section>
+    <section class="about-section filler-1">
+      <h2>uepppp 1</h2>
+      <p>Aqui hay texto</p>
+    </section>
+
+    <section class="about-section tech-stack">
+      <h2>Tech Stack</h2>
+      <p>Aqui hay texto</p>
+    </section>
+
+    <section class="about-section formation">
+      <h2>Formation</h2>
+      <p>Aqui hay texto</p>
+    </section>
+
+    <section class="about-section interests">
+      <h2>Interests</h2>
+      <p>Aqui hay texto</p>
+    </section>
+
+    <section class="about-section filler-2">
+      <h2>uepppp 2</h2>
+      <p>Aqui hay texto</p>
+    </section>
   </div>
 </BaseLayout>
 
 <style>
   .page-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 3em;
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    grid-template-rows: repeat(7, minmax(0, 1fr));
+    align-items: stretch;
+    padding: 2em 0;
+    gap: 1em;
+  }
+
+  h2 {
+    font-size: 2.5em;
+  }
+
+  .about-section {
+    height: 100%;
+    box-sizing: border-box;
+    background-color: var(--primary);
+    padding: 1em;
+    box-shadow: 8px 8px 0 var(--tertiary);
+    transition: all 0.15s ease-in-out;
+
+    p,
+    h2 {
+      color: var(--background);
+    }
+  }
+
+  .about-section:hover {
+    transform: translate(-4px, -4px);
+    background-color: var(--secondary);
+  }
+
+  .experience {
+    grid-row: 1 / span 4;
+    grid-column: 1 / span 3;
+  }
+
+  .filler-1 {
+    grid-row: 1;
+    grid-column: 4;
+  }
+
+  .tech-stack {
+    grid-row: 2 / span 3;
+    grid-column: 4;
+  }
+
+  .filler-2 {
+    grid-row: 5;
+    grid-column: 1;
+  }
+
+  .formation {
+    grid-row: 5 / span 3;
+    grid-column: 2 / span 3;
+  }
+
+  .interests {
+    grid-row: 6 / span 2;
+    grid-column: 1;
+  }
+
+  /* Tablet */
+  @media (max-width: 900px) {
+    .page-container {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      grid-template-rows: auto;
+    }
+
+    .experience,
+    .filler-1,
+    .tech-stack,
+    .filler-2,
+    .formation,
+    .interests {
+      grid-column: auto;
+      grid-row: auto;
+    }
+
+    .experience {
+      grid-column: 1 / -1;
+    }
+
+    .formation {
+      grid-column: 1 / -1;
+    }
+
+    .tech-stack {
+      min-height: 250px;
+    }
+
+    .interests {
+      min-height: 200px;
+    }
+  }
+
+  /* Mobile */
+  @media (max-width: 600px) {
+    .page-container {
+      grid-template-columns: 1fr;
+      gap: 1em;
+      padding: 1em 0;
+    }
+
+    .experience,
+    .filler-1,
+    .tech-stack,
+    .filler-2,
+    .formation,
+    .interests {
+      grid-column: 1;
+      grid-row: auto;
+      min-height: auto;
+    }
+
+    .about-section {
+      height: auto;
+    }
+
+    h2 {
+      font-size: 2em;
+    }
   }
 </style>

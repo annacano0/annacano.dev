@@ -3,30 +3,39 @@
 ---
 
 <div class="footer">
-  <p class="logo">
-    created by: <a
-      href="https://github.com/annacano0/annacano.dev"
-      target="_blank">annacano0</a
-    >
-  </p>
-  <div class="socials">
-    <a
-      class="icon"
-      href="https://www.linkedin.com/in/anna-cano-palacios/"
-      target="_blank">in</a
-    >
-    <a class="icon" href="https://github.com/annacano0" target="_blank">Gh</a>
+  <div class="footer-content">
+    <p class="logo">
+      created by: <a
+        href="https://github.com/annacano0/annacano.dev"
+        target="_blank">annacano0</a
+      >
+    </p>
+    <div class="socials">
+      <a
+        class="icon"
+        href="https://www.linkedin.com/in/anna-cano-palacios/"
+        target="_blank">in</a
+      >
+      <a class="icon" href="https://github.com/annacano0" target="_blank">Gh</a>
+    </div>
   </div>
 </div>
 <style>
   .footer {
-    width: 90%;
+    width: 100%;
     background-color: var(--background);
-    border-top: 1px solid var(--color-1);
     position: fixed;
     bottom: 0px;
     display: flex;
+    justify-content: center;
+  }
+
+  .footer-content {
+    width: 90%;
+    height: 100%;
+    display: flex;
     justify-content: space-between;
+    border-top: 1px solid var(--color-1);
     padding: 0.5em 3em;
   }
 
