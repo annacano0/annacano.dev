@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://annacano.dev/sitemap-index.xml
