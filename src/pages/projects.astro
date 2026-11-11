@@ -62,18 +62,19 @@ import projects from "../data/projects";
   .card-container {
     display: flex;
     flex-wrap: wrap;
-    gap: 2.5em;
+    gap: 2em;
     justify-content: center;
   }
 
   .card {
     background-color: var(--primary);
-    width: 25em;
+    width: 24em;
+    max-width: 100%;
     height: 35em;
     display: flex;
     flex-direction: column;
     padding: 1em;
-    border: 15px double var(--background);
+    border: 14px double var(--background);
     box-shadow: 8px 8px 0 var(--tertiary);
     transition: all 0.15s ease-in-out;
   }
@@ -86,7 +87,7 @@ import projects from "../data/projects";
 
   .card-img {
     width: 100%;
-    border: 4px solid var(--background);
+    border: 5px solid var(--background);
   }
 
   .card h2 {
@@ -97,6 +98,7 @@ import projects from "../data/projects";
 
   .card p {
     color: var(--background);
+    font-size: 1.25em;
     line-height: 1.4;
   }
 
@@ -112,10 +114,10 @@ import projects from "../data/projects";
   }
 
   .tech-badge {
-    font-size: 0.85em;
+    font-size: 1cap;
     font-weight: bold;
-    padding: 0.2em 0.6em;
-    border: 2px solid currentColor;
+    padding: 0.15em 0.5em;
+    border: 3px solid currentColor;
     transform: rotate(-2deg);
   }
 
@@ -140,27 +142,33 @@ import projects from "../data/projects";
   .project-status {
     display: inline-block;
     font-weight: bold;
-    font-size: 1em;
-    padding: 0.3em 0.6em;
+    font-size: 0.9em;
+    padding: 0.25em 0.5em;
     text-transform: uppercase;
   }
 
   .not-started {
     color: var(--blue);
-    border: 2px solid var(--blue);
+    border: 3px solid var(--blue);
   }
 
   .wip {
     color: var(--orange);
-    border: 2px solid var(--orange);
+    border: 3px solid var(--orange);
   }
 
   .completed {
     color: var(--yellow);
-    border: 2px solid var(--yellow);
+    border: 3px solid var(--yellow);
   }
 
   footer {
     display: none;
+  }
+
+  @media (min-width: 700px) {
+    .page-container {
+      margin-bottom: 9em;
+    }
   }
 </style>

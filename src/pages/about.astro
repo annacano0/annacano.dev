@@ -1,166 +1,598 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+import me from "../assets/icons/me.svg";
+import location from "../assets/icons/location.svg";
+import sword from "../assets/icons/sword.svg";
+
+import {
+  roles,
+  intro,
+  stats,
+  languages,
+  experience,
+  stack,
+  education,
+  interests,
+} from "../data/about";
+
+const SKILL_SEGMENTS = 10;
 ---
 
 <BaseLayout pageTitle="about me">
-  <div class="page-container">
-    <section class="about-section experience">
-      <h2>Experience</h2>
-      <p>
-        Hi! I'm Anna Cano, a software engineer with a passion for creating
-        innovative solutions. I specialize in web development and have a strong
-        background in both front-end and back-end technologies.
-      </p>
-    </section>
-    <section class="about-section filler-1">
-      <h2>uepppp 1</h2>
-      <p>Aqui hay texto</p>
+  <div class="about">
+    <section class="hero">
+      <div class="portrait" data-reveal>
+        <img src={me.src} alt="Pixel art portrait of Anna" />
+      </div>
+
+      <div class="hero-text" data-reveal style="--delay: 1">
+        <h2 class="name">Anna Cano</h2>
+        <p class="role">
+          <span id="role-text">{roles[0]}</span><span class="cursor"></span>
+        </p>
+
+        {intro.map((paragraph) => <p class="lead">{paragraph}</p>)}
+        <p class="eyebrow">
+          <img src={location.src} alt="" class="pixel-icon" />
+          Barcelona, Spain
+        </p>
+        <ul class="stats">
+          {
+            stats.map((stat) => (
+              <li class="stat">
+                <strong>{stat.value}</strong>
+                <span>{stat.label}</span>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
     </section>
 
-    <section class="about-section tech-stack">
-      <h2>Tech Stack</h2>
-      <p>Aqui hay texto</p>
+    <section class="block">
+      <h2 class="block-title" data-reveal>Experience</h2>
+      <ol class="timeline">
+        {
+          experience.map((job, index) => (
+            <li class="timeline-item" data-reveal style={`--delay: ${index}`}>
+              <span class="node" />
+              <article class="panel">
+                <span class="tag">{job.period}</span>
+                <h3>{job.title}</h3>
+                <p class="company">{job.company}</p>
+                <p>{job.description}</p>
+              </article>
+            </li>
+          ))
+        }
+      </ol>
     </section>
 
-    <section class="about-section formation">
-      <h2>Formation</h2>
-      <p>Aqui hay texto</p>
+    <section class="block">
+      <h2 class="block-title" data-reveal>Tech Stack</h2>
+      <ul class="stack">
+        {
+          stack.map((item, index) => (
+            <li class="slot" data-reveal style={`--delay: ${index % 4}`}>
+              <img src={sword.src} alt="" class="pixel-icon" />
+              <span>{item}</span>
+            </li>
+          ))
+        }
+      </ul>
     </section>
 
-    <section class="about-section interests">
-      <h2>Interests</h2>
-      <p>Aqui hay texto</p>
+    <section class="block">
+      <h2 class="block-title" data-reveal>Languages</h2>
+      <ul class="skills">
+        {
+          languages.map((language, index) => (
+            <li class="skill" data-reveal style={`--delay: ${index % 2}`}>
+              <span class="skill-name">{language.name}</span>
+              <span
+                class="bar"
+                role="img"
+                aria-label={`${language.level} out of ${SKILL_SEGMENTS}`}
+              >
+                {Array.from({ length: SKILL_SEGMENTS }, (_, i) => (
+                  <span
+                    class:list={["segment", { filled: i < language.level }]}
+                    style={`--i: ${i}`}
+                  />
+                ))}
+              </span>
+            </li>
+          ))
+        }
+      </ul>
     </section>
 
-    <section class="about-section filler-2">
-      <h2>uepppp 2</h2>
-      <p>Aqui hay texto</p>
+    <section class="block">
+      <h2 class="block-title" data-reveal>Education & Training</h2>
+      <ul class="education">
+        {
+          education.map((item, index) => (
+            <li class="panel" data-reveal style={`--delay: ${index}`}>
+              <span class="tag">{item.period}</span>
+              <h3>{item.title}</h3>
+              <p>{item.place}</p>
+              <ul class="topics">
+                {item.topics.map((topic) => (
+                  <li class="topic">{topic}</li>
+                ))}
+              </ul>
+            </li>
+          ))
+        }
+      </ul>
+    </section>
+
+    <section class="block">
+      <h2 class="block-title" data-reveal>Interests</h2>
+      <ul class="interests">
+        {
+          interests.map((interest, index) => (
+            <li class="interest" data-reveal style={`--delay: ${index}`}>
+              <h3>{interest.title}</h3>
+              <p>{interest.text}</p>
+            </li>
+          ))
+        }
+      </ul>
     </section>
   </div>
 </BaseLayout>
 
+<script>
+  import { roles } from "../data/about";
+
+  const root = document.documentElement;
+  const reduceMotion = window.matchMedia(
+    "(prefers-reduced-motion: reduce)",
+  ).matches;
+
+  // Scroll reveal
+  const items = document.querySelectorAll<HTMLElement>("[data-reveal]");
+  if (reduceMotion || !("IntersectionObserver" in window)) {
+    items.forEach((item) => item.classList.add("is-visible"));
+  } else {
+    root.classList.add("js-reveal");
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+          entry.target.classList.add("is-visible");
+          observer.unobserve(entry.target);
+        });
+      },
+      { threshold: 0.2 },
+    );
+    items.forEach((item) => observer.observe(item));
+  }
+
+  // Typewriter cycling through roles
+  const roleText = document.getElementById("role-text");
+  if (roleText && !reduceMotion) {
+    const TYPE_MS = 90;
+    const PAUSE_MS = 1800;
+    let roleIndex = 0;
+    let charIndex = roles[0].length;
+    let deleting = true;
+
+    const tick = () => {
+      const current = roles[roleIndex];
+      charIndex += deleting ? -1 : 1;
+      roleText.textContent = current.slice(0, charIndex);
+
+      let delay = TYPE_MS;
+      if (!deleting && charIndex === current.length) {
+        deleting = true;
+        delay = PAUSE_MS;
+      } else if (deleting && charIndex === 0) {
+        deleting = false;
+        roleIndex = (roleIndex + 1) % roles.length;
+      }
+      window.setTimeout(tick, delay);
+    };
+    window.setTimeout(tick, PAUSE_MS);
+  }
+</script>
+
 <style>
-  .page-container {
+  .about {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding-block: 2em 9em;
     display: grid;
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-    grid-template-rows: repeat(7, minmax(0, 1fr));
-    align-items: stretch;
-    padding: 2em 0;
-    gap: 1em;
+    gap: 4em;
   }
 
-  h2 {
-    font-size: 2.5em;
+  /* Shared pieces */
+  .pixel-icon {
+    width: 1.5em;
+    height: 1.5em;
+    image-rendering: pixelated;
+    flex-shrink: 0;
   }
 
-  .about-section {
-    height: 100%;
-    box-sizing: border-box;
-    background-color: var(--primary);
-    padding: 1em;
+  .panel {
+    padding: 1.25em;
+    color: var(--dark);
+    background-color: var(--light);
+    border: 5px solid var(--dark);
     box-shadow: 8px 8px 0 var(--tertiary);
-    transition: all 0.15s ease-in-out;
+    transition:
+      transform 0.25s cubic-bezier(0.22, 1, 0.36, 1),
+      box-shadow 0.25s cubic-bezier(0.22, 1, 0.36, 1);
 
-    p,
-    h2 {
-      color: var(--background);
+    h3 {
+      line-height: 1.2;
+    }
+
+    p {
+      color: var(--dark);
+    }
+
+    &:hover {
+      transform: translate(-4px, -4px);
+      box-shadow: 12px 12px 0 var(--tertiary);
     }
   }
 
-  .about-section:hover {
-    transform: translate(-4px, -4px);
-    background-color: var(--secondary);
+  h3 {
+    font-size: 1.75rem;
   }
 
-  .experience {
-    grid-row: 1 / span 4;
-    grid-column: 1 / span 3;
+  .panel p,
+  .interest p {
+    font-size: 1.5rem;
   }
 
-  .filler-1 {
-    grid-row: 1;
-    grid-column: 4;
+  .tag {
+    display: inline-block;
+    margin-bottom: 0.5em;
+    padding: 0 0.5em;
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: var(--light);
+    background-color: var(--dark);
   }
 
-  .tech-stack {
-    grid-row: 2 / span 3;
-    grid-column: 4;
+  .block-title {
+    display: flex;
+    align-items: center;
+    gap: 0.5em;
+    margin-bottom: 1em;
+    font-size: 2.5rem;
+    text-transform: uppercase;
   }
 
-  .filler-2 {
-    grid-row: 5;
-    grid-column: 1;
+  .block-title::before {
+    content: "";
+    width: 0.6em;
+    height: 0.6em;
+    background-color: var(--highlight);
+    box-shadow: 4px 4px 0 var(--tertiary);
+    animation: blink 1.2s steps(2) infinite;
   }
 
-  .formation {
-    grid-row: 5 / span 3;
-    grid-column: 2 / span 3;
+  ul,
+  ol {
+    list-style: none;
   }
 
+  /* Scroll reveal: smooth slide in */
+  :global(.js-reveal) [data-reveal] {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+
+  [data-reveal].is-visible {
+    animation: pop-in 0.5s steps(5) both;
+    animation-delay: calc(var(--delay, 0) * 0.12s);
+  }
+
+  /* Hero */
+  .hero {
+    display: grid;
+    grid-template-columns: minmax(0, 340px) minmax(0, 1fr);
+    gap: 3em;
+    align-items: center;
+  }
+
+  .portrait {
+    aspect-ratio: 1;
+    padding: 1em;
+    background-color: var(--yellow);
+    border: 5px solid var(--dark);
+    box-shadow: 12px 12px 0 var(--tertiary);
+  }
+
+  .portrait img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    image-rendering: pixelated;
+    animation: float 2s steps(4) infinite;
+  }
+
+  .eyebrow {
+    display: flex;
+    align-items: center;
+    gap: 0.5em;
+    margin-bottom: 0.5em;
+    font-size: 1.25rem;
+    font-weight: bold;
+  }
+
+  .name {
+    font-size: 4rem;
+    line-height: 1.1;
+    text-shadow: 3px 3px 0 var(--tertiary);
+  }
+
+  .role {
+    min-height: 1.5em;
+    font-size: 2.2rem;
+    font-weight: bold;
+    color: var(--highlight);
+  }
+
+  .cursor {
+    display: inline-block;
+    width: 0.5em;
+    height: 1em;
+    margin-left: 0.15em;
+    vertical-align: text-bottom;
+    background-color: var(--highlight);
+    animation: blink 0.9s steps(2) infinite;
+  }
+
+  .lead {
+    margin-bottom: 0.75em;
+    font-size: 1.5rem;
+    max-width: 38em;
+  }
+
+  .stats {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.25em;
+    margin-top: 1.5em;
+  }
+
+  .stat {
+    display: grid;
+    padding: 0.5em 1em;
+    color: var(--dark);
+    background-color: var(--orange);
+    border: 4px solid var(--dark);
+    box-shadow: 6px 6px 0 var(--tertiary);
+
+    strong {
+      font-size: 2.2rem;
+      line-height: 1.1;
+    }
+
+    span {
+      font-size: 1.2rem;
+    }
+  }
+
+  /* Skills */
+  .skills {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 420px), 1fr));
+    gap: 1.5em 3em;
+  }
+
+  .skill {
+    display: grid;
+    gap: 0.4em;
+  }
+
+  .skill-name {
+    font-size: 1.5rem;
+    font-weight: bold;
+  }
+
+  .bar {
+    display: grid;
+    grid-auto-flow: column;
+    grid-auto-columns: 1fr;
+    gap: 4px;
+    padding: 4px;
+    background-color: var(--tertiary);
+    border: 4px solid var(--dark);
+  }
+
+  .segment {
+    height: 1.5rem;
+    background-color: var(--background);
+  }
+
+  :global(html:not(.js-reveal)) .segment.filled {
+    background-color: var(--highlight);
+  }
+
+  .is-visible .segment.filled {
+    animation: fill 0.3s steps(2) both;
+    animation-delay: calc(0.3s + var(--i) * 0.08s);
+  }
+
+  /* Timeline */
+  .timeline {
+    position: relative;
+    display: grid;
+    gap: 2em;
+    padding-left: 2.5em;
+  }
+
+  .timeline::before {
+    content: "";
+    position: absolute;
+    left: 0.5em;
+    top: 0;
+    bottom: 0;
+    width: 6px;
+    background-image: linear-gradient(
+      to bottom,
+      var(--primary) 50%,
+      transparent 50%
+    );
+    background-size: 6px 16px;
+  }
+
+  .timeline-item {
+    position: relative;
+  }
+
+  .node {
+    position: absolute;
+    left: -2.5em;
+    top: 1.25em;
+    width: 22px;
+    height: 22px;
+    background-color: var(--highlight);
+    border: 4px solid var(--dark);
+    box-shadow: 3px 3px 0 var(--tertiary);
+  }
+
+  .company {
+    margin-bottom: 0.5em;
+    font-weight: bold;
+    color: var(--dark-blue);
+  }
+
+  /* Stack */
+  .stack {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
+    gap: 1.25em;
+  }
+
+  .slot {
+    display: flex;
+    align-items: center;
+    gap: 0.6em;
+    padding: 0.75em 1em;
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: var(--dark);
+    background-color: var(--medium-light);
+    border: 4px solid var(--dark);
+    box-shadow: 5px 5px 0 var(--tertiary);
+    transition:
+      transform 0.15s steps(2),
+      background-color 0.15s steps(2);
+  }
+
+  .slot:hover {
+    background-color: var(--yellow);
+    transform: translateY(-6px);
+  }
+
+  .slot:hover .pixel-icon {
+    animation: wiggle 0.4s steps(2) infinite;
+  }
+
+  /* Education & interests */
+  .topics {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5em;
+    margin-top: 0.75em;
+  }
+
+  .topic {
+    padding: 0.1em 0.6em;
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: var(--dark);
+    background-color: var(--yellow);
+    border: 3px solid var(--dark);
+    box-shadow: 3px 3px 0 var(--dark-blue);
+  }
+
+  .education,
   .interests {
-    grid-row: 6 / span 2;
-    grid-column: 1;
+    display: grid;
+    gap: 1.5em;
   }
 
-  /* Tablet */
-  @media (max-width: 900px) {
-    .page-container {
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      grid-template-rows: auto;
-    }
+  .interest {
+    padding: 1em 1.25em;
+    background-color: var(--background);
+    border: 4px solid var(--primary);
+    box-shadow: 6px 6px 0 var(--tertiary);
 
-    .experience,
-    .filler-1,
-    .tech-stack,
-    .filler-2,
-    .formation,
-    .interests {
-      grid-column: auto;
-      grid-row: auto;
-    }
-
-    .experience {
-      grid-column: 1 / -1;
-    }
-
-    .formation {
-      grid-column: 1 / -1;
-    }
-
-    .tech-stack {
-      min-height: 250px;
-    }
-
-    .interests {
-      min-height: 200px;
+    h3 {
+      color: var(--highlight);
     }
   }
 
-  /* Mobile */
-  @media (max-width: 600px) {
-    .page-container {
+  /* Keyframes */
+  @keyframes pop-in {
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
+
+  @keyframes blink {
+    50% {
+      opacity: 0;
+    }
+  }
+
+  @keyframes float {
+    50% {
+      transform: translateY(-8px);
+    }
+  }
+
+  @keyframes fill {
+    to {
+      background-color: var(--highlight);
+    }
+  }
+
+  @keyframes wiggle {
+    50% {
+      transform: rotate(-12deg);
+    }
+  }
+
+  @media (max-width: 800px) {
+    .hero {
       grid-template-columns: 1fr;
-      gap: 1em;
-      padding: 1em 0;
+      justify-items: center;
+      text-align: center;
     }
 
-    .experience,
-    .filler-1,
-    .tech-stack,
-    .filler-2,
-    .formation,
-    .interests {
-      grid-column: 1;
-      grid-row: auto;
-      min-height: auto;
+    .portrait {
+      width: min(100%, 300px);
     }
 
-    .about-section {
-      height: auto;
+    .eyebrow,
+    .stats {
+      justify-content: center;
     }
 
-    h2 {
-      font-size: 2em;
+    .name {
+      font-size: 3rem;
+    }
+
+    .block-title {
+      font-size: 2rem;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation: none !important;
     }
   }
 </style>

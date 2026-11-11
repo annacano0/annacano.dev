@@ -9,8 +9,8 @@ import BaseLayout from "../layouts/BaseLayout.astro";
     <div class="text-container">
       <h2>Full Stack Developer</h2>
       <p>
-        Passionate about writing clean code, building efficient systems,
-        collaborating in agile environments and art!
+        Passionate about writing clean code, Test-Driven Development, building
+        efficient systems, collaborating in agile environments and design.
       </p>
       <div class="info-container">
         <button class="button">
@@ -33,34 +33,61 @@ import BaseLayout from "../layouts/BaseLayout.astro";
     gap: 2em;
     padding: 2em 15em 5em 15em;
     flex-wrap: wrap;
-    margin-bottom: 2em;
+    margin-bottom: 9em;
   }
 
   .image-container {
     background: url("../assets/icons/me.svg") no-repeat center center;
     background-size: contain;
     width: 100%;
-    max-width: 250px;
+    max-width: 312px;
     aspect-ratio: 1;
     flex-shrink: 0;
-    background-color: var(--tertiary);
+    background-color: var(--primary);
+    image-rendering: pixelated;
+    animation:
+      rise 0.6s ease-out both,
+      float 2s steps(4) 0.6s infinite;
+    transition: box-shadow 0.15s steps(2);
+  }
+
+  .image-container:hover {
+    box-shadow: 10px 10px 0 var(--tertiary);
   }
 
   :global(.dark-theme .image-container) {
     background-color: var(--primary);
-    box-shadow: 5px 5px 0 var(--tertiary);
+    box-shadow: 6px 6px 0 var(--tertiary);
   }
 
   :global(.light-theme .image-container) {
     background-color: var(--secondary);
-    box-shadow: 5px 5px 0 var(--tertiary);
+    box-shadow: 6px 6px 0 var(--tertiary);
   }
 
   .text-container {
-    font-size: 1.75em;
+    font-size: 2.2em;
     line-height: 1.5;
     flex: 1;
     min-width: 300px;
+  }
+
+  /* Staggered entrance for the text block */
+  .text-container > * {
+    animation: rise 0.6s ease-out both;
+    animation-delay: calc(var(--i, 0) * 0.12s + 0.2s);
+  }
+
+  h2 {
+    --i: 0;
+  }
+
+  .text-container > p {
+    --i: 1;
+  }
+
+  .info-container {
+    --i: 2;
   }
 
   .info-container {
@@ -83,11 +110,46 @@ import BaseLayout from "../layouts/BaseLayout.astro";
   .icon-container {
     background: url("../assets/icons/location.svg") no-repeat center center;
     background-size: contain;
-    max-width: 1.5rem;
-    max-height: 1.5rem;
+    max-width: 1.875rem;
+    max-height: 1.875rem;
     aspect-ratio: 1;
     flex-shrink: 0;
     margin: 0.5rem;
+    animation: bob 1.6s steps(2) infinite;
+  }
+
+  @keyframes rise {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+  }
+
+  @keyframes float {
+    50% {
+      transform: translateY(-8px);
+    }
+  }
+
+  @keyframes blink {
+    50% {
+      opacity: 0;
+    }
+  }
+
+  @keyframes bob {
+    50% {
+      transform: translateY(-4px);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .image-container,
+    .text-container > *,
+    h2::after,
+    .icon-container {
+      animation: none;
+    }
   }
 
   @media (max-width: 800px) {
@@ -102,7 +164,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
     }
 
     .image-container {
-      max-width: 250px;
+      max-width: 312px;
     }
 
     h2,
@@ -113,7 +175,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 
   @media (max-width: 500px) {
     .text-container {
-      font-size: 1.75em;
+      font-size: 2.2em;
       line-height: 1.5;
       flex: 1;
       min-width: none;
@@ -140,12 +202,18 @@ import BaseLayout from "../layouts/BaseLayout.astro";
     }
 
     .image-container {
-      max-width: 250px;
+      max-width: 312px;
     }
 
     h2,
     p {
       text-align: center;
+    }
+  }
+
+  @media (min-width: 700px) {
+    .page-container {
+      margin-bottom: 2em;
     }
   }
 </style>
