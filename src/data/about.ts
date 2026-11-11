@@ -1,4 +1,4 @@
-export const roles = ["software engineer", "illustrator", "pixel enthusiast"];
+export const roles = ["software engineer"];
 
 export const intro = [
   "I build reliable, well-tested React and TypeScript applications, with a product mindset and an eye for detail.",
@@ -7,7 +7,6 @@ export const intro = [
 
 export const stats = [
   { value: "2+", label: "years coding" },
-  { value: "10+", label: "feature enhancements" },
   { value: "100%", label: "coffee powered" },
 ];
 
@@ -60,7 +59,7 @@ export const education = [
   {
     period: "2023 - 2025",
     title: "Higher Vocational Diploma in Web Development",
-    place: "Institut Tecnològic de Barcelona (high performance center)",
+    place: "Institut Tecnològic de Barcelona",
     topics: ["Kotlin", "PHP", "Vue", "Relational Databases", "Figma"],
   },
   {
@@ -74,5 +73,5 @@ export const education = [
 export const interests = [
   { title: "Reading", text: "Now reading: Mistborn - The Hero of Ages" },
   { title: "Illustration", text: "Sketchbooks always within reach." },
-  { title: "Knitting", text: "From Christmas decor to bandanas." },
+  { title: "Music", text: "I play the guitar when I can." },
 ];

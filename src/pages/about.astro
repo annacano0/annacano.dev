@@ -273,7 +273,7 @@ const SKILL_SEGMENTS = 10;
     height: 0.6em;
     background-color: var(--highlight);
     box-shadow: 4px 4px 0 var(--tertiary);
-    animation: blink 1.2s steps(2) infinite;
+    animation: blink 1.2s ease-in-out infinite;
   }
 
   ul,
@@ -288,7 +288,7 @@ const SKILL_SEGMENTS = 10;
   }
 
   [data-reveal].is-visible {
-    animation: pop-in 0.5s steps(5) both;
+    animation: pop-in 0.5s ease-out both;
     animation-delay: calc(var(--delay, 0) * 0.12s);
   }
 
@@ -313,7 +313,7 @@ const SKILL_SEGMENTS = 10;
     width: 100%;
     height: 100%;
     image-rendering: pixelated;
-    animation: float 2s steps(4) infinite;
+    animation: float 2s ease-in-out infinite;
   }
 
   .eyebrow {
@@ -345,7 +345,7 @@ const SKILL_SEGMENTS = 10;
     margin-left: 0.15em;
     vertical-align: text-bottom;
     background-color: var(--highlight);
-    animation: blink 0.9s steps(2) infinite;
+    animation: blink 0.9s ease-in-out infinite;
   }
 
   .lead {
@@ -416,7 +416,7 @@ const SKILL_SEGMENTS = 10;
   }
 
   .is-visible .segment.filled {
-    animation: fill 0.3s steps(2) both;
+    animation: fill 0.3s ease-in-out both;
     animation-delay: calc(0.3s + var(--i) * 0.08s);
   }
 
@@ -483,8 +483,8 @@ const SKILL_SEGMENTS = 10;
     border: 4px solid var(--dark);
     box-shadow: 5px 5px 0 var(--tertiary);
     transition:
-      transform 0.15s steps(2),
-      background-color 0.15s steps(2);
+      transform 0.15s ease-in-out,
+      background-color 0.15s ease-in-out;
   }
 
   .slot:hover {
@@ -493,7 +493,7 @@ const SKILL_SEGMENTS = 10;
   }
 
   .slot:hover .pixel-icon {
-    animation: wiggle 0.4s steps(2) infinite;
+    animation: wiggle 0.4s ease-in-out infinite;
   }
 
   /* Education & interests */
